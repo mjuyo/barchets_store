@@ -1,6 +1,17 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.page(params[:page]).per(9)
+    @categories = Category.all
+    @products = Product.all
+
+    if params[:search].present?
+      @products = @products.where('products.name LIKE ? OR products.description LIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
+    if params[:category_id].present?
+      @products = @products.joins(:categories).where(categories: { id: params[:category_id] })
+    end
+
+    @products = @products.page(params[:page]).per(9)
   end
 
   def category

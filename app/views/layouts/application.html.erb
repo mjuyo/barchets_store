@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BarchetsGroceryStore</title>
+    <title>Barchet's Grocery Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "styles", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="flex flex-col min-h-screen">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/category_search'%>
+    <main class="flex-grow">
       <%= yield %>
     </main>
-  </body>
+    <%= render 'shared/footer' %>
+</body>
 </html>

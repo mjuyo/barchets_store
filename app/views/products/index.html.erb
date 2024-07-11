@@ -12,21 +12,30 @@
     </ul>
   </nav>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <% @products.each do |product| %>
-      <div class="border p-4 rounded-lg shadow">
-        <h2 class="text-xl font-semibold mb-2"><%= link_to product.name, product_path(product) %></h2>
-        <p class="mb-2"><%= product.description %></p>
-        <p class="text-lg font-bold mb-2">Price: $<%= product.price %></p>
-        <p class="mb-2">Stock: <%= product.stock_quantity %> items</p>
-        <% if product.image.attached? %>
-          <%= image_tag product.image, class: "w-full h-48 object-cover mb-2" %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+  <% if @products.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <% @products.each do |product| %>
+        <div class="border p-4 rounded-lg shadow">
+          <div class="image-container">
+            <% if product.image.attached? %>
+              <%= image_tag product.image, class: "w-52 h-52 object-cover mb-2" %>
+            <% else %>
+              <div class="image-placeholder"></div>
+            <% end %>
+          </div>
+          <h2 class="text-xl font-semibold mt-4"><%= link_to product.name, product_path(product) %></h2>
+          <p class="mb-2"><%= product.description %></p>
+          <p class="text-lg font-bold mb-2">Price: $<%= product.price %></p>
+          <p class="mb-2">Stock: <%= product.stock_quantity %> items</p>
+          
+        </div>
+      <% end %>
+    </div>
 
-  <div class="mt-4">
-    <%= paginate @products%>
-  </div>
+    <div class="mt-4">
+      <%= paginate @products %>
+    </div>
+  <% else %>
+    <p class="text-red-500 text-xl">No products found matching your search criteria.</p>
+  <% end %>
 </div>
