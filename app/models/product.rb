@@ -7,5 +7,13 @@ class Product < ApplicationRecord
     validates :description, presence: true
     validates :price, presence: true
     validates :stock_quantity, presence: true
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["created_at", "description", "id", "id_value", "name", "price", "stock_quantity", "updated_at"]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+        %w[categories category_products image_attachment image_blob]
+    end
 end
 
