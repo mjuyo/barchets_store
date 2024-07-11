@@ -1,0 +1,21 @@
+name,description,price,stock_quantity,categories
+Red Apple,1kg of fresh red apples.,3.0,100,"Fruits,Snacks"
+Banana,Ripe bananas. Per 5 units,2.5,120,Fruits
+Whole Milk,1 liter of whole milk.,1.5,80,Dairy
+Whole Wheat Bread,500g of whole wheat bread.,2.0,60,Bakery
+Orange Juice,1 liter of fresh orange juice.,3.5,70,Beverages
+Strawberry Yogurt,250ml of strawberry flavored yogurt.,2.0,50,"Dairy,Snacks"
+Cheddar Cheese,400g of cheddar cheese block.,5.0,40,Dairy
+Tomato,500g of fresh tomatoes.,1.2,200,Vegetables
+Carrot,1kg of organic carrots.,3.0,150,Vegetables
+Granola Bar,Healthy granola bar.,1.5,90,"Snacks,Bakery"
+Water 250ml,Bottled spring water.,1.0,300,Beverages
+Eggs,Dozen organic eggs.,8.0,110,Dairy
+Butter,500g of salted butter.,3.0,60,"Dairy,Bakery"
+Chicken Breast,1kg of skinless chicken breast.,6.5,70,Meat
+Beef Steak,1kg of tender beef steak.,10.0,50,Meat
+Grapes,1kg of fresh green grapes.,4.0,120,"Fruits,Snacks"
+Spinach,250g of organic spinach.,2.0,90,Vegetables
+White Rice,1 kg of white rice.,2.0,150,Grains
+Spaghetti,500g of spaghetti.,1.5,130,"Grains,Bakery"
+Peanut Butter,250ml of creamy peanut butter.,3.5,80,"Snacks,Bakery"
