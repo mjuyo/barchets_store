@@ -75,3 +75,5 @@ gem "devise", "~> 4.9"
 gem "cssbundling-rails", "~> 1.4"
 
 gem "kaminari", "~> 1.2"
+
+gem "sass-rails", "~> 6.0"
