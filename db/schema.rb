@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_11_005114) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_11_013852) do
   create_table "about_infos", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -56,6 +56,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_005114) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_products", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contact_infos", force: :cascade do |t|
     t.string "phone"
     t.string "address"
@@ -77,6 +90,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_005114) do
   create_table "contacts", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price"
+    t.integer "stock_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
