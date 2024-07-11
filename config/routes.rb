@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get 'products', to: 'products#index'
+  get 'categories/:id', to: 'products#category', as: 'category'
+  resources :products, only: [:show]
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

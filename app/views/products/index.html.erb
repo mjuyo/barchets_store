@@ -1,0 +1,28 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Available Products</h1>
+
+  <nav class="mb-6">
+    <h2 class="text-xl font-semibold">Categories</h2>
+    <ul class="flex space-x-4">
+      <% Category.all.each do |category| %>
+        <li>
+          <%= link_to category.name, category_path(category), class: "text-blue-500 hover:underline" %>
+        </li>
+      <% end %>
+    </ul>
+  </nav>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <% @products.each do |product| %>
+      <div class="border p-4 rounded-lg shadow">
+        <h2 class="text-xl font-semibold mb-2"><%= link_to product.name, product_path(product) %></h2>
+        <p class="mb-2"><%= product.description %></p>
+        <p class="text-lg font-bold mb-2">Price: $<%= product.price %></p>
+        <p class="mb-2">Stock: <%= product.stock_quantity %> items</p>
+        <% if product.image.attached? %>
+          <%= image_tag product.image, class: "w-full h-48 object-cover mb-2" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
