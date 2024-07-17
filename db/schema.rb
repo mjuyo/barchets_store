@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_11_014630) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_16_013752) do
   create_table "about_infos", force: :cascade do |t|
     t.text "content"
     t.datetime "created_at", null: false
@@ -122,6 +122,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_014630) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "encrypted_password"
+    t.string "address"
+    t.integer "province_id"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -131,6 +147,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_014630) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.decimal "pst_rate", precision: 5, scale: 2
+    t.decimal "hst_rate", precision: 5, scale: 2
+    t.decimal "gst_rate", precision: 5, scale: 2
+    t.decimal "qst_rate", precision: 5, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "provinces"
 end
