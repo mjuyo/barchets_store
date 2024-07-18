@@ -9,5 +9,16 @@
       <%= link_to 'About Us', about_info_path, class: "text-white hover:underline" %>
       <%= link_to 'Contact Us', contact_info_path, class: "text-white hover:underline" %>
     </div>
+
+    <div>
+      <% if customer_signed_in? %>
+        <span><%= current_customer.name %></span>
+        <%= link_to 'Edit Profile', edit_customer_registration_path, class: "text-white mx-2" %>
+        <%= button_to 'Logout', destroy_customer_session_path, :method => :delete, class: "text-white mx-2", data: { confirm: "Are you sure?" } %>
+      <% else %>
+        <%= link_to 'Sign Up', new_customer_registration_path, class: "bg-blue-500 text-white px-3 py-2 rounded" %>
+        <%= link_to 'Login', new_customer_session_path, class: "bg-green-500 text-white px-3 py-2 rounded ml-2" %>
+      <% end %>
+    </div>
   </div>
 </nav>

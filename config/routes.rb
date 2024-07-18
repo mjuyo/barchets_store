@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  devise_for :customers
+  root to: 'home#index'
   get 'products', to: 'products#index'
   get 'categories/:id', to: 'products#category', as: 'category'
   resources :products, only: [:show]
