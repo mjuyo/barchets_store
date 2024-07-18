@@ -11,6 +11,15 @@ class ProductsController < ApplicationController
       @products = @products.joins(:categories).where(categories: { id: params[:category_id] })
     end
 
+    case params[:filter]
+    when 'on_sale'
+      @products = @products.on_sale
+    when 'new'
+      @products = @products.new_products
+    when 'recently_updated'
+      @products = @products.recently_updated
+    end
+
     @products = @products.page(params[:page]).per(9)
   end
 

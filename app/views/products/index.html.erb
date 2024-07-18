@@ -12,6 +12,16 @@
     </ul>
   </nav>
 
+  <nav class="mb-6">
+    <h2 class="text-xl font-semibold">Filters</h2>
+    <ul class="flex space-x-4">
+      <li><%= link_to 'All Products', products_path, class: "text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'On Sale', products_path(filter: 'on_sale'), class: "text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'New Products', products_path(filter: 'new'), class: "text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'Recently Updated', products_path(filter: 'recently_updated'), class: "text-blue-500 hover:underline" %></li>
+    </ul>
+  </nav>
+
   <% if @products.any? %>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <% @products.each do |product| %>

@@ -1,14 +1,6 @@
 ActiveAdmin.register Product do
   # Specify parameters which should be permitted for assignment
-  permit_params :name, :description, :price, :stock_quantity, :image, category_ids: [] 
-
-  # or consider:
-  #
-  # permit_params do
-  #   permitted = [:name, :description, :price, :stock_quantity]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params :name, :description, :price, :stock_quantity, :on_sale, :image, category_ids: [] 
 
   # For security, limit the actions that should be available
   actions :all, except: []
@@ -19,6 +11,7 @@ ActiveAdmin.register Product do
   filter :description
   filter :price
   filter :stock_quantity
+  filter :on_sale
   filter :categories, as: :check_boxes, collection: proc { Category.all }
   filter :created_at
   filter :updated_at
@@ -31,6 +24,7 @@ ActiveAdmin.register Product do
     column :description
     column :price
     column :stock_quantity
+    column :on_sale
     column :categories do |product|
       product.categories.map(&:name).join(", ")
     end
@@ -47,6 +41,7 @@ ActiveAdmin.register Product do
       row :description
       row :price
       row :stock_quantity
+      row :on_sale
       row :categories do |product|
         product.categories.map(&:name).join(", ")
       end
@@ -68,6 +63,7 @@ ActiveAdmin.register Product do
       f.input :description
       f.input :price
       f.input :stock_quantity
+      f.input :on_sale
       f.input :categories, as: :check_boxes
       f.input :image, as: :file
     end
