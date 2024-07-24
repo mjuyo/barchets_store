@@ -1,17 +1,22 @@
 <div class="container mx-auto p-4">
   <h1 class="text-2xl font-bold mb-4"><%= @product.name %></h1>
-  <div class="flex">
-    <div class="w-1/2">
-      <% if @product.image.attached? %>
-        <%= image_tag @product.image, class: "w-full h-64 object-cover" %>
-      <% end %>
-    </div>
-    <div class="w-1/2 pl-4">
-      <p class="mb-4"><%= @product.description %></p>
-      <p class="text-lg font-bold mb-4">Price: $<%= @product.price %></p>
-      <p class="mb-4">Stock: <%= @product.stock_quantity %> items</p>
-      <p class="mb-4">Categories: <%= @product.categories.map(&:name).join(", ") %></p>
-      <%= link_to 'Back to Products', products_path, class: "btn btn-primary" %>
-    </div>
+
+  <div class="image-container mb-4">
+    <% if @product.image.attached? %>
+      <%= image_tag @product.image, class: "w-52 h-52 object-cover" %>
+    <% else %>
+      <div class="image-placeholder"></div>
+    <% end %>
   </div>
+
+  <p class="mb-2"><%= @product.description %></p>
+  <p class="text-lg font-bold mb-2">Price: $<%= @product.price %></p>
+  <p class="mb-2">Stock: <%= @product.stock_quantity %> items</p>
+
+  <%= form_with url: add_to_cart_product_path(@product), method: :post, local: true do |f| %>
+    <%= number_field_tag :quantity, 1, min: 1, class: "w-16 p-2 border rounded mb-2" %>
+    <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded" %>
+  <% end %>
+
+  <%= link_to 'Back to Products', products_path, class: "bg-gray-500 text-white px-3 py-2 rounded mt-4 inline-block" %>
 </div>

@@ -37,7 +37,10 @@
           <p class="mb-2"><%= product.description %></p>
           <p class="text-lg font-bold mb-2">Price: $<%= product.price %></p>
           <p class="mb-2">Stock: <%= product.stock_quantity %> items</p>
-          
+          <%= form_with url: add_to_cart_product_path(product), method: :post, local: true do |f| %>
+            <%= number_field_tag :quantity, 1, min: 1, class: "w-16 p-2 border rounded mb-2" %>
+            <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded" %>
+          <% end %>
         </div>
       <% end %>
     </div>

@@ -8,7 +8,22 @@ Rails.application.routes.draw do
       get :new_products
       get :recently_updated
     end
+
+    member do
+      post 'add_to_cart'
+      post 'remove_from_cart'
+    end
   end
+  
+  resources :orders, only: [:new, :create]
+
+  resource :cart, only: [:show]
+
+  post 'add_to_cart/:product_id', to: 'carts#add_to_cart', as: 'add_to_cart'
+  delete 'remove_from_cart/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
+  patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
+
+  resources :orders, only: [:new, :create]
 
   get 'categories/:id', to: 'products#category', as: 'category'
 

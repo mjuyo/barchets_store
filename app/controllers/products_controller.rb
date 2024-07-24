@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: %i[show add_to_cart remove_from_cart]
+
   def index
     @categories = Category.all
     @products = Product.all
@@ -30,6 +32,36 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @product = Product.find(params[:id])
+  end
+
+  def add_to_cart
+    @cart = session[:cart] ||= {}
+    product_id = params[:id].to_s
+    quantity = params[:quantity].to_i
+
+    if @cart[product_id]
+      @cart[product_id]['quantity'] += quantity
+    else
+      @cart[product_id] = { 'quantity' => quantity }
+    end
+
+    session[:cart] = @cart
+    redirect_to cart_path, notice: "#{@product.name} has been added to your cart."
+  end
+
+  def remove_from_cart
+    @cart = session[:cart] ||= {}
+    product_id = params[:id].to_s
+
+    @cart.delete(product_id)
+    session[:cart] = @cart
+    redirect_to cart_path, notice: "#{@product.name} has been removed from your cart."
+  end
+
+  private
+
+  def set_product
     @product = Product.find(params[:id])
   end
 end
