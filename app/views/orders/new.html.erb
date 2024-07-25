@@ -1,15 +1,19 @@
-<h2>Place Your Order</h2>
-
-<%= form_for @order do |f| %>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
+<div class="flex flex-col items-center mt-6">
+  <h2 class="text-2xl font-bold mb-6">Place Your Order</h2>
+  
+  <div class="w-full max-w-md bg-gray-100 rounded-lg shadow-md p-8">
+    <%= form_for @order do |f| %>
+      <div class="mb-4">
+        <%= f.label :address, class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.text_field :address, class: "form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :province_id, 'Province', class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.collection_select :province_id, Province.all, :id, :name, {}, class: "form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
+      </div>
+      <div class="flex flex-col items-center justify-between mt-8">
+        <%= f.submit "Place Order", class: "bg-blue-500 hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :province_id, 'Province' %><br />
-    <%= f.collection_select :province_id, Province.all, :id, :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Place Order" %>
-  </div>
-<% end %>
+</div>
