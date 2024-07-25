@@ -1,0 +1,99 @@
+<div class="w-[85%] mx-auto min-h-[65vh] mt-24">
+  <% if @cart.any? %>
+    <h1 class="font-bold text-2xl pt-10">
+      Cart
+      <% item_count = @cart.values.sum { |item| item['quantity'] } %>
+      <% if item_count == 1 %>
+        <span class="font-normal">(<%= item_count %> item)</span>
+      <% else %>
+        <span class="font-normal">(<%= item_count %> items)</span>
+      <% end %>
+    </h1>
+    <div class="grid lg:grid-cols-3 gap-12 p-6">
+      <div class="lg:col-span-2 bg-white divide-y">
+        <% @cart.each do |product_id, details| %>
+          <% product = Product.find(product_id) %>
+          <div class="grid md:grid-cols-4 items-center gap-8 py-6" id="<%= "cart-#{product.id}" %>">
+            <div class="md:col-span-2 flex items-center gap-6">
+              <div class="w-32 h-22 shrink-0 shadow-[0_0px_4px_0px_rgba(6,81,237,0.2)] p-4">
+                <%= link_to product_path(product), data: { turbo: false } do %>
+                  <% if product.image.attached? %>
+                    <%= image_tag product.image, alt: product.name, class: "w-full h-full object-contain rounded-md" %>
+                  <% else %>
+                    <div class="w-full h-full object-contain rounded-md bg-gray-200 flex items-center justify-center">
+                      No Image Available
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <div>
+                <h3 class="text-lg font-extrabold text-[#333]">
+                  <%= link_to product_path(product), data: { turbo: false } do %>
+                    <%= product.name %>
+                  <% end %>
+                </h3>
+                <h6 class="text-md text-gray-500 mt-2">
+                  Price:
+                  <strong class="ml-2">
+                    <%= number_to_currency(product.price, unit: "$", precision: 2) %>
+                  </strong>
+                </h6>
+              </div>
+            </div>
+            <div class="flex">
+              <%= form_with(url: decrease_cart_path(product_id: product.id), method: :patch, local: true) do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= hidden_field_tag :quantity, details['quantity'].to_i - 1 %>
+                <%= submit_tag "-", class: "cursor-pointer shrink-0 py-2 font-semibold text-[#333] text-2xl hover:text-black/[0.7]" %>
+              <% end %>
+              <span class="bg-transparent mx-4 px-4 py-2 font-semibold text-[#333] text-md shadow-[0_0px_4px_0px_rgba(6,81,237,0.2)]">
+                <%= details['quantity'] %>
+              </span>
+              <%= form_with(url: update_cart_path(product_id: product.id), method: :patch, local: true) do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= hidden_field_tag :quantity, details['quantity'].to_i + 1 %>
+                <%= submit_tag "+", class: "cursor-pointer shrink-0 py-2 font-semibold text-[#333] text-2xl hover:text-black/[0.7]" %>
+              <% end %>
+            </div>
+            <div class="flex items-center">
+              <h4 class="text-lg font-bold text-[#333] mr-auto">
+                <%= number_to_currency(product.price * details['quantity'], unit: "$", precision: 2) %>
+              </h4>
+              <%= form_with(url: remove_cart_path(product_id: product.id), method: :delete, local: true) do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= submit_tag "X", class: "cursor-pointer shrink-0 text-[#333] font-semibold hover:text-red-500" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="bg-[#F9F6F0] rounded p-6">
+        <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">
+          Order Summary
+        </h3>
+        <ul class="text-[#333] divide-y mt-6">
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
+            Subtotal
+            <span class="ml-auto font-bold">
+              <%= number_to_currency(@cart.sum { |product_id, details| Product.find(product_id).price * details['quantity'] }, unit: "$", precision: 2) %>
+            </span>
+          </li>
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
+            Shipping
+            <span class="ml-auto font-bold">
+              Free
+            </span>
+          </li>
+          <li class="text-black/[0.3] pt-2">
+            Applicable taxes will be calculated at checkout.
+          </li>
+        </ul>
+        <div class="mt-6 text-md px-6 py-2.5 w-full bg-[#CDAC90] hover:bg-[#B68256] text-white rounded">
+          <%= link_to 'Check Out', new_order_path, class: "flex justify-center", data: { turbo: false } %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <p class="mt-[20vh] text-center text-2xl">Your cart is empty</p>
+  <% end %>
+</div>

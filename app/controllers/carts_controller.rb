@@ -2,43 +2,42 @@ class CartsController < ApplicationController
   before_action :initialize_cart
 
   def show
-
   end
 
-  def add_to_cart
-    product = Product.find(params[:product_id])
+  def add
+    product = Product.find(params[:id])
     quantity = params[:quantity].to_i
 
     if @cart[product.id.to_s].nil?
       @cart[product.id.to_s] = { 'quantity' => quantity }
     else
-      @cart[product.id.to_s]['quantity'] += quantity 
+      @cart[product.id.to_s]['quantity'] += 1
     end
 
     save_cart
     redirect_to cart_path, notice: 'Product added to cart.'
   end
 
-  def remove_from_cart
-    @cart.delete(params[:product_id])
+  def decrease
+    product_id = params[:id]
+    if @cart[product_id] && @cart[product_id]['quantity'] > 1
+      @cart[product_id]['quantity'] -= 1
+    else
+      @cart.delete(product_id)
+    end
+
+    save_cart
+    redirect_to cart_path, notice: 'Product quantity decreased.'
+  end
+
+  def remove
+    @cart.delete(params[:id])
     save_cart
     redirect_to cart_path, notice: 'Product removed from cart.'
   end
 
-  def update_cart
-    product_id = params[:product_id]
-    if params[:action_type] == 'increase'
-      @cart[product_id]['quantity'] += 1
-    elsif params[:action_type] == 'decrease' && @cart[product_id]['quantity'] > 1
-      @cart[product_id]['quantity'] -= 1
-    else
-      @cart[product_id]['quantity'] = params[:quantity].to_i
-    end
-    save_cart
-    redirect_to cart_path, notice: 'Cart updated.'
-  end
-
   private
+
   def initialize_cart
     @cart = session[:cart] || {}
   end

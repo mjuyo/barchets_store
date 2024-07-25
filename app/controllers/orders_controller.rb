@@ -25,9 +25,7 @@ class OrdersController < ApplicationController
           price: product.price * details['quantity']
         )
       end
-      @order.calculate_total_price
-      @order.calculate_total_tax
-      @order.save
+      
       session[:cart] = {}
       logger.debug "Order successfully saved: #{@order.inspect}"
       redirect_to order_path(@order), notice: 'Order placed succesfully.'

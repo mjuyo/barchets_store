@@ -10,22 +10,20 @@ Rails.application.routes.draw do
     end
 
     member do
-      post 'add_to_cart'
-      post 'remove_from_cart'
+      post 'add_to_cart', to: 'carts#add'
+      delete 'remove_from_cart', to: 'carts#remove'
     end
   end
   
   resources :orders, only: [:new, :create, :show]
 
   resource :cart, only: [:show] do
-    patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
-    patch 'increase_quantity/:product_id', to: 'carts#update_cart', as: 'increase_quantity', defaults: { action_type: 'increase' }
-    patch 'decrease_quantity/:product_id', to: 'carts#update_cart', as: 'decrease_quantity', defaults: { action_type: 'decrease' }
+    patch 'add/:id', to: 'carts#add', as: 'add'
+    patch 'decrease/:id', to: 'carts#decrease', as: 'decrease'
+    delete 'remove/:id', to: 'carts#remove', as: 'remove'
   end
 
-  post 'add_to_cart/:product_id', to: 'carts#add_to_cart', as: 'add_to_cart'
-  delete 'remove_from_cart/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
-  # patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
+  post 'add_to_cart/:product_id', to: 'carts#add', as: 'add_to_cart'
 
   resources :orders, only: [:new, :create]
 
@@ -34,12 +32,8 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get 'contact_info', to: 'pages#contact_info', as: 'contact_info'
   get 'about_info', to: 'pages#about_info', as: 'about_info'
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
 end
