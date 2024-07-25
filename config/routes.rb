@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :orders, only: [:new, :create, :show]
+  resources :orders, only: [:new, :create, :show, :index]
 
   resource :cart, only: [:show] do
     patch 'add/:id', to: 'carts#add', as: 'add'
@@ -24,8 +24,6 @@ Rails.application.routes.draw do
   end
 
   post 'add_to_cart/:product_id', to: 'carts#add', as: 'add_to_cart'
-
-  resources :orders, only: [:new, :create]
 
   get 'categories/:id', to: 'products#category', as: 'category'
 

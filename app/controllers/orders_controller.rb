@@ -6,10 +6,11 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def create
-    logger.debug "Order Params: #{order_params.inspect}"
-    logger.debug "Cart: #{@cart.inspect}"
+  def index
+    @orders = current_customer.orders.order(created_at: :desc)
+  end
 
+  def create
     @order = current_customer.orders.new(order_params)
     @order.order_date = Time.zone.now
     @order.status = 'pending'
@@ -27,10 +28,8 @@ class OrdersController < ApplicationController
       end
       
       session[:cart] = {}
-      logger.debug "Order successfully saved: #{@order.inspect}"
       redirect_to order_path(@order), notice: 'Order placed succesfully.'
     else
-      logger.debug "Order not saved: #{@order.errors.full_messages.inspect}"
       render :new
     end
   end

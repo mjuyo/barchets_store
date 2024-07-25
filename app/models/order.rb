@@ -14,5 +14,13 @@ class Order < ApplicationRecord
         province = Province.find(province_id)
         self.total_tax = (total_price * province.pst_rate / 100) + (total_price * province.gst_rate / 100) + (total_price * province.hst_rate / 100)
     end
+
+    def self.ransackable_associations(auth_object = nil)
+        ["customer", "order_products", "products", "province"]
+    end
+
+    def self.ransackable_attributes(auth_object = nil)
+        ["address", "created_at", "customer_id", "id", "id_value", "order_date", "province_id", "status", "total_price", "total_tax", "updated_at"]
+    end
   end
   

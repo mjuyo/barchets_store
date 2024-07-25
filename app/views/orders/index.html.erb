@@ -1,0 +1,26 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">Past Orders</h1>
+  <% if @orders.empty? %>
+    <p>You have no past orders.</p>
+  <% else %>
+    <div class="space-y-4">
+      <% @orders.each do |order| %>
+        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow">
+          <div class="flex items-center space-x-4">
+            <img src="logo.png" alt="Store Logo" class="w-16 h-16">
+            <div>
+              <h2 class="font-semibold"><%= order.created_at.strftime("%b %d, %Y") %></h2>
+              <p class="text-sm text-gray-500">Order ID: <%= order.id %></p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <p class="text-xl font-bold">$<%= order.total_price + order.total_tax %></p>
+            <div>
+            <%= link_to ">>", order_path(order), class: "text-blue-500 hover:underline" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
