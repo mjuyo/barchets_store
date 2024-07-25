@@ -2,6 +2,7 @@ class CartsController < ApplicationController
   before_action :initialize_cart
 
   def show
+
   end
 
   def add_to_cart
@@ -25,7 +26,14 @@ class CartsController < ApplicationController
   end
 
   def update_cart
-    @cart[params[:product_id]]['quantity'] = params[:quantity].to_i
+    product_id = params[:product_id]
+    if params[:action_type] == 'increase'
+      @cart[product_id]['quantity'] += 1
+    elsif params[:action_type] == 'decrease' && @cart[product_id]['quantity'] > 1
+      @cart[product_id]['quantity'] -= 1
+    else
+      @cart[product_id]['quantity'] = params[:quantity].to_i
+    end
     save_cart
     redirect_to cart_path, notice: 'Cart updated.'
   end

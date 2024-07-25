@@ -15,13 +15,17 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :orders, only: [:new, :create]
+  resources :orders, only: [:new, :create, :show]
 
-  resource :cart, only: [:show]
+  resource :cart, only: [:show] do
+    patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
+    patch 'increase_quantity/:product_id', to: 'carts#update_cart', as: 'increase_quantity', defaults: { action_type: 'increase' }
+    patch 'decrease_quantity/:product_id', to: 'carts#update_cart', as: 'decrease_quantity', defaults: { action_type: 'decrease' }
+  end
 
   post 'add_to_cart/:product_id', to: 'carts#add_to_cart', as: 'add_to_cart'
   delete 'remove_from_cart/:product_id', to: 'carts#remove_from_cart', as: 'remove_from_cart'
-  patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
+  # patch 'update_cart/:product_id', to: 'carts#update_cart', as: 'update_cart'
 
   resources :orders, only: [:new, :create]
 
