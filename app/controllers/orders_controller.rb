@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
   before_action :initialize_cart
   before_action :authenticate_customer!, only: [:new, :create]
-  
+
   def new
     @order = Order.new
+    @order_summary = calculate_order_summary
   end
 
   def index
@@ -28,7 +29,7 @@ class OrdersController < ApplicationController
       end
       
       session[:cart] = {}
-      redirect_to order_path(@order), notice: 'Order placed succesfully.'
+      redirect_to order_path(@order), notice: 'Order placed successfully.'
     else
       render :new
     end
@@ -68,5 +69,13 @@ class OrdersController < ApplicationController
 
   def calculate_individual_tax(total_price, tax_rate)
     (total_price * tax_rate / 100).round(2)
+  end
+
+  def calculate_order_summary
+    {
+      subtotal: @cart.sum { |product_id, details| Product.find(product_id).price * details['quantity'] },
+      shipping: 0,
+      taxes: 'Applicable taxes will be calculated at checkout.'
+    }
   end
 end

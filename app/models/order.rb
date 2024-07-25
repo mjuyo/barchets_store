@@ -22,5 +22,9 @@ class Order < ApplicationRecord
     def self.ransackable_attributes(auth_object = nil)
         ["address", "created_at", "customer_id", "id", "id_value", "order_date", "province_id", "status", "total_price", "total_tax", "updated_at"]
     end
+
+    # Add columns for status and payment_id
+    # t.string :status, default: 'pending'
+    # t.string :payment_id
   end
   

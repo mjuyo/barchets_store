@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     delete 'remove/:id', to: 'carts#remove', as: 'remove'
   end
 
+  resources :payments, only: [:new, :create]
+
   post 'add_to_cart/:product_id', to: 'carts#add', as: 'add_to_cart'
 
   get 'categories/:id', to: 'products#category', as: 'category'

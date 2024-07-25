@@ -77,3 +77,7 @@ gem "cssbundling-rails", "~> 1.4"
 gem "kaminari", "~> 1.2"
 
 gem "sass-rails", "~> 6.0"
+
+gem "stripe", "~> 12.3"
+
+gem 'dotenv-rails', groups: [:development, :test]
