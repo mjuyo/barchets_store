@@ -15,6 +15,19 @@ class Product < ApplicationRecord
     scope :new_products, ->  { where('created_at >= ?', 3.days.ago) }
     scope :recently_updated, -> { where('updated_at >= ?', 3.days.ago).where.not('created_at >= ?', 3.days.ago) }
 
+    # Image resizing
+    def large_image
+        image.variant(resize_to_limit: [320, 320])
+    end
+    
+    def medium_image
+        image.variant(resize_to_limit: [200, 200])
+    end
+
+    def thumbnail_image
+        image.variant(resize_to_limit: [80, 80])
+    end
+
     def self.ransackable_attributes(auth_object = nil)
         ["created_at", "description", "id", "id_value", "name", "price", "stock_quantity", "updated_at", "on_sale"]
     end

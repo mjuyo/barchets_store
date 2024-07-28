@@ -29,7 +29,7 @@
               <div class="p-2">
                 <%= link_to product_path(product), data: { turbo: false } do %>
                   <% if product.image.attached? %>
-                    <%= image_tag product.image, alt: product.name, class: "w-20 h-20 object-contain rounded-md" %>
+                    <%= image_tag product.thumbnail_image, alt: product.name, class: " object-contain rounded-md" %>
                   <% else %>
                     <div class="w-20 h-20 object-contain rounded-md bg-gray-200 flex items-center justify-center">
                       No Image Available
