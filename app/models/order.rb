@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
     belongs_to :customer
     belongs_to :province
-    has_many :order_products
+    has_many :order_products, dependent: :destroy
     has_many :products, through: :order_products
   
     validates :order_date, :status, :total_price, :total_tax, :address, :province_id, presence: true

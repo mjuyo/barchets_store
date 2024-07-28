@@ -12,12 +12,13 @@ class OrdersController < ApplicationController
   end
 
   def create
+    puts params.inspect
     @order = current_customer.orders.new(order_params)
     @order.order_date = Time.zone.now
     @order.status = 'pending'
     @order.total_price = calculate_total_price
     @order.total_tax = calculate_total_tax(@order.total_price)
-
+  
     if @order.save
       @cart.each do |product_id, details|
         product = Product.find(product_id)
@@ -27,7 +28,7 @@ class OrdersController < ApplicationController
           price: product.price * details['quantity']
         )
       end
-      
+     
       session[:cart] = {}
       redirect_to order_path(@order), notice: 'Order placed successfully.'
     else

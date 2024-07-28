@@ -1,14 +1,15 @@
 <div class="container mx-auto p-4">
-  <%= link_to '<< Back to Cart', cart_path, class: "text-lg font-semibold mb-4 inline-block text-blue-500 hover:underline" %>
-  <h1 class="text-2xl font-bold mb-4">Place Your Order</h1>
+  <%= link_to '<< Back to the Cart', cart_path, class: "text-lg font-semibold mb-4 inline-block text-blue-500 hover:underline" %>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-    <!-- Left Column: Shipping Details, Item Details, and Payment Details -->
-    <div class="lg:col-span-2 space-y-8">
-      <!-- Shipping Details -->
-      <div class="bg-gray-100 rounded-lg shadow-md p-6">
-        <h2 class="text-lg font-semibold mb-4">Shipping Details</h2>
-        <%= form_for @order do |f| %>
+  <%= form_for @order do |f| %>
+    <h1 class="text-2xl font-bold mb-4">Place Your Order</h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <!-- Left Column: Shipping Details, Item Details, and Payment Details -->
+      <div class="lg:col-span-2 space-y-8">
+        <!-- Shipping Details -->
+        <div class="bg-gray-100 rounded-lg shadow-md p-6">
+          <h2 class="text-lg font-semibold mb-4">Shipping Details</h2>
           <div class="mb-4">
             <%= f.label :address, class: "block text-gray-700 font-bold mb-2" %>
             <%= f.text_field :address, class: "form-input mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
@@ -17,62 +18,60 @@
             <%= f.label :province_id, 'Province', class: "block text-gray-700 font-bold mb-2" %>
             <%= f.collection_select :province_id, Province.all, :id, :name, {}, class: "form-select mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
           </div>
-        <% end %>
-      </div>
+        </div>
 
-      <!-- Item Details -->
-      <div class="bg-gray-100 rounded-lg shadow-md p-6">
-        <h2 class="text-lg font-semibold mb-4">Item Details</h2>
-        <div class="flex flex-wrap">
-          <% @cart.each do |product_id, details| %>
-            <% product = Product.find(product_id) %>
-            <div class="p-2">
-              <%= link_to product_path(product), data: { turbo: false } do %>
-                <% if product.image.attached? %>
-                  <%= image_tag product.image, alt: product.name, class: "w-20 h-20 object-contain rounded-md" %>
-                <% else %>
-                  <div class="w-20 h-20 object-contain rounded-md bg-gray-200 flex items-center justify-center">
-                    No Image Available
-                  </div>
+        <!-- Item Details -->
+        <div class="bg-gray-100 rounded-lg shadow-md p-6">
+          <h2 class="text-lg font-semibold mb-4">Item Details</h2>
+          <div class="flex flex-wrap">
+            <% @cart.each do |product_id, details| %>
+              <% product = Product.find(product_id) %>
+              <div class="p-2">
+                <%= link_to product_path(product), data: { turbo: false } do %>
+                  <% if product.image.attached? %>
+                    <%= image_tag product.image, alt: product.name, class: "w-20 h-20 object-contain rounded-md" %>
+                  <% else %>
+                    <div class="w-20 h-20 object-contain rounded-md bg-gray-200 flex items-center justify-center">
+                      No Image Available
+                    </div>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
-          <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="bg-gray-100 rounded-lg shadow-md p-6">
+          <h2 class="text-lg font-semibold mb-4">Payment Details</h2>
+          <!-- Add your payment form here -->
         </div>
       </div>
 
-      <!-- Payment Details -->
+      <!-- Right Column: Order Summary -->
       <div class="bg-gray-100 rounded-lg shadow-md p-6">
-        <h2 class="text-lg font-semibold mb-4">Payment Details</h2>
-        <!-- Add your payment form here -->
-      </div>
-    </div>
-
-    <!-- Right Column: Order Summary -->
-    <div class="bg-gray-100 rounded-lg shadow-md p-6">
-      <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
-      <ul class="text-[#333] divide-y mt-6">
-        <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
-          Subtotal
-          <span class="ml-auto font-bold">
-            <%= number_to_currency(@cart.sum { |product_id, details| Product.find(product_id).price * details['quantity'] }, unit: "$", precision: 2) %>
-          </span>
-        </li>
-        <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
-          Shipping
-          <span class="ml-auto font-bold">
-            Free
-          </span>
-        </li>
-        <li class="text-black/[0.3] pt-2">
-          Applicable taxes will be calculated at checkout.
-        </li>
-      </ul>
-      <div class="mt-6 text-md px-6 py-2.5 w-full bg-blue-500 hover:bg-green-500 text-white rounded flex justify-center items-center">
-        <%= form_for @order do |f| %>
+        <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
+        <ul class="text-[#333] divide-y mt-6">
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
+            Subtotal
+            <span class="ml-auto font-bold">
+              <%= number_to_currency(@cart.sum { |product_id, details| Product.find(product_id).price * details['quantity'] }, unit: "$", precision: 2) %>
+            </span>
+          </li>
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">
+            Shipping
+            <span class="ml-auto font-bold">
+              Free
+            </span>
+          </li>
+          <li class="text-black/[0.3] pt-2">
+            Applicable taxes will be calculated at checkout.
+          </li>
+        </ul>
+        <div class="mt-6 text-md px-6 py-2.5 w-full bg-blue-500 hover:bg-green-500 text-white rounded flex justify-center items-center">
           <%= f.submit "Place Order", class: "flex justify-center cursor-pointer" %>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 </div>
