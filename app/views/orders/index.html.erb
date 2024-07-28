@@ -5,21 +5,23 @@
   <% else %>
     <div class="space-y-4">
       <% @orders.each do |order| %>
-        <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow">
-          <div class="flex items-center space-x-4">
-            <%= image_tag "logo.png", alt: "Store Logo", class: "w-16 h-16" %>
-            <div>
-              <h2 class="font-semibold"><%= order.created_at.strftime("%b %d, %Y") %></h2>
-              <p class="text-sm text-gray-500">Order ID: <%= order.id %></p>
+        <%= link_to order_path(order), class: "block" do %>
+          <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow hover:bg-gray-100">
+            <div class="flex items-center space-x-4">
+              <%= image_tag "logo.png", alt: "Store Logo", class: "w-16 h-16" %>
+              <div>
+                <h2 class="font-semibold"><%= order.created_at.strftime("%b %d, %Y") %></h2>
+                <p class="text-sm text-gray-500">Order ID: <%= order.id %></p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-4">
+              <p class="text-xl font-bold">$<%= number_with_precision(order.sub_total_price + order.total_tax, precision: 2) %></p>
+              <div>
+                <span class="text-blue-500 hover:text-blue-700 hover:underline">>></span>
+              </div>
             </div>
           </div>
-          <div class="flex items-center space-x-4">
-            <p class="text-xl font-bold">$<%= order.total_price + order.total_tax %></p>
-            <div>
-            <%= link_to ">>", order_path(order), class: "text-blue-500 hover:underline" %>
-            </div>
-          </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

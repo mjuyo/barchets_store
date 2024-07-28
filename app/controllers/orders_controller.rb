@@ -16,8 +16,10 @@ class OrdersController < ApplicationController
     @order = current_customer.orders.new(order_params)
     @order.order_date = Time.zone.now
     @order.status = 'pending'
-    @order.total_price = calculate_total_price
-    @order.total_tax = calculate_total_tax(@order.total_price)
+    @order.sub_total_price = calculate_sub_total_price
+    @order.total_tax = calculate_total_tax(@order.sub_total_price)
+    @order.total_price = @order.sub_total_price + @order.total_tax
+    
   
     if @order.save
       @cart.each do |product_id, details|
@@ -39,10 +41,10 @@ class OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @province = @order.province
-    @pst = calculate_individual_tax(@order.total_price, @province.pst_rate)
-    @gst = calculate_individual_tax(@order.total_price, @province.gst_rate)
-    @hst = calculate_individual_tax(@order.total_price, @province.hst_rate)
-    @qst = calculate_individual_tax(@order.total_price, @province.qst_rate)
+    @pst = calculate_individual_tax(@order.sub_total_price, @province.pst_rate)
+    @gst = calculate_individual_tax(@order.sub_total_price, @province.gst_rate)
+    @hst = calculate_individual_tax(@order.sub_total_price, @province.hst_rate)
+    @qst = calculate_individual_tax(@order.sub_total_price, @province.qst_rate)
   end
 
   private
@@ -55,21 +57,21 @@ class OrdersController < ApplicationController
     @cart = session[:cart] || {}
   end
 
-  def calculate_total_price
+  def calculate_sub_total_price
     @cart.sum { |product_id, details| Product.find(product_id).price * details['quantity'] }
   end
 
-  def calculate_total_tax(total_price)
+  def calculate_total_tax(sub_total_price)
     province = Province.find(params[:order][:province_id])
-    pst = (total_price * province.pst_rate / 100)
-    gst = (total_price * province.gst_rate / 100)
-    hst = (total_price * province.hst_rate / 100)
-    qst = (total_price * province.qst_rate / 100)
+    pst = (sub_total_price * province.pst_rate / 100)
+    gst = (sub_total_price * province.gst_rate / 100)
+    hst = (sub_total_price * province.hst_rate / 100)
+    qst = (sub_total_price * province.qst_rate / 100)
     pst + gst + hst + qst
   end
 
-  def calculate_individual_tax(total_price, tax_rate)
-    (total_price * tax_rate / 100).round(2)
+  def calculate_individual_tax(sub_total_price, tax_rate)
+    (sub_total_price * tax_rate / 100).round(2)
   end
 
   def calculate_order_summary

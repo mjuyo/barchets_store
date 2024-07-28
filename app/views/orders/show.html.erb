@@ -15,13 +15,13 @@
     <div class="w-1/2 pl-4">
       <div class="bg-gray-100 shadow rounded p-4 mb-4 h-full">
         <h2 class="text-lg font-semibold">Pricing Summary</h2>
-        <p><strong>Total Price:</strong> $<%= @order.total_price %></p>
+        <p><strong>Sub Total Price:</strong> $<%= @order.sub_total_price %></p>
         <p><strong>PST:</strong> $<%= @pst %></p>
         <p><strong>GST:</strong> $<%= @gst %></p>
         <p><strong>HST:</strong> $<%= @hst %></p>
         <p><strong>QST:</strong> $<%= @qst %></p>
         <p><strong>Total Tax:</strong> $<%= @order.total_tax %></p>
-        <p><strong>Grand Total:</strong> $<%= @order.total_price + @order.total_tax %></p>
+        <p><strong>Grand Total:</strong> $<%= @order.sub_total_price + @order.total_tax %></p>
       </div>
     </div>
   </div>
