@@ -1,24 +1,13 @@
 <div class="container mx-auto p-4">
   <h1 class="text-2xl font-bold mb-4">Available Products</h1>
 
-  <nav class="mb-6">
-    <h2 class="text-xl font-semibold">Categories</h2>
-    <ul class="flex space-x-4">
-      <% Category.all.each do |category| %>
-        <li>
-          <%= link_to category.name, category_path(category), class: "text-blue-500 hover:underline" %>
-        </li>
-      <% end %>
-    </ul>
-  </nav>
 
   <nav class="mb-6">
-    <h2 class="text-xl font-semibold">Filters</h2>
     <ul class="flex space-x-4">
-      <li><%= link_to 'All Products', products_path, class: "text-blue-500 hover:underline" %></li>
-      <li><%= link_to 'On Sale', products_path(filter: 'on_sale'), class: "text-blue-500 hover:underline" %></li>
-      <li><%= link_to 'New Products', products_path(filter: 'new'), class: "text-blue-500 hover:underline" %></li>
-      <li><%= link_to 'Recently Updated', products_path(filter: 'recently_updated'), class: "text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'All Products', products_path, class: params[:filter].nil? ? "bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600" : "px-2 py-1 text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'On Sale', products_path(filter: 'on_sale'), class: params[:filter] == 'on_sale' ? "bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600" : "px-2 py-1 text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'New Products', products_path(filter: 'new'), class: params[:filter] == 'new' ? "bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600" : "px-2 py-1 text-blue-500 hover:underline" %></li>
+      <li><%= link_to 'Recently Updated', products_path(filter: 'recently_updated'), class: params[:filter] == 'recently_updated' ? "bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600" : "px-2 py-1 text-blue-500 hover:underline" %></li>
     </ul>
   </nav>
 
