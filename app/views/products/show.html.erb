@@ -1,7 +1,7 @@
 <div class="container mx-auto p-4 mt-6">
   <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><%= link_to 'Home', root_path %></li>
+      <li class="breadcrumb-item"><%= link_to 'Products', products_path %></li>
       <li class="breadcrumb-item"><%= link_to @category.name, category_path(@category) %></li>
       <li class="breadcrumb-item active" aria-current="page"><%= @product.name %></li>
     </ol>
@@ -10,9 +10,9 @@
     <div class="md:w-1/3">
       <div class="image-container mb-4">
         <% if @product.image.attached? %>
-          <%= image_tag @product.large_image, class: "object-cover" %>
+          <%= image_tag @product.large_image, class: "object-cover rounded-lg" %>
         <% else %>
-          <div class="w-64 h-64 bg-gray-200"></div>
+          <div class="image-placeholder-large"></div>
         <% end %>
       </div>
     </div>
@@ -31,7 +31,10 @@
         <% end %>
       </div>
       <div class="mb-4">
-        <button class="bg-red-500 text-white px-6 py-2 rounded-lg">Add to Cart</button>
+        <%= form_with url: add_to_cart_product_path(@product), method: :post, local: true do |f| %>
+              <%= number_field_tag :quantity, 1, min: 1, class: "w-16 h-10 p-2 border rounded-lg mb-2" %>
+              <%= f.submit 'Add to Cart', class: "bg-red-500 text-white px-6 py-2 rounded-lg cursor-pointer" %>
+            <% end %>
       </div>
       <div class="border-t pt-4">
         <h2 class="text-xl font-bold mb-2">Product Description</h2>

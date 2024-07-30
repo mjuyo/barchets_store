@@ -22,7 +22,25 @@ body {
     justify-content: center;
     font-size: 1rem;
     color: #757575; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    
+    &::after {
+      content: "No Image Available"; 
+    }
+  }
+
+  .image-placeholder-large {
+    width: 320px;
+    height: 320px;
+    background-color: #e0e0e0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #757575; 
     border: 1px solid #ddd; 
+    border-radius: 10px;
     
     &::after {
       content: "No Image Available"; 

@@ -17,7 +17,7 @@
         <div class="border p-4 rounded-lg shadow">
           <div class="image-container flex flex-col items-center">
             <% if product.image.attached? %>
-              <%= image_tag product.medium_image, class: " object-cover mb-2" %>
+              <%= image_tag product.medium_image, class: " object-cover mb-2 rounded-lg" %>
             <% else %>
               <div class="image-placeholder"></div>
             <% end %>
@@ -35,8 +35,8 @@
               Stock: <span class="<%= product.stock_level[:color] %>"><%= product.stock_level[:level] %></span>
             </p>
             <%= form_with url: add_to_cart_product_path(product), method: :post, local: true do |f| %>
-              <%= number_field_tag :quantity, 1, min: 1, class: "w-16 h-10 p-2 border rounded mb-2" %>
-              <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded" %>
+              <%= number_field_tag :quantity, 1, min: 1, class: "w-16 h-10 p-2 border rounded-lg mb-2" %>
+              <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded-lg cursor-pointer" %>
             <% end %>
           </div>
         </div>
