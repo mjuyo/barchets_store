@@ -12,24 +12,33 @@
   </nav>
 
   <% if @products.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <% @products.each do |product| %>
         <div class="border p-4 rounded-lg shadow">
-          <div class="image-container">
+          <div class="image-container flex flex-col items-center">
             <% if product.image.attached? %>
               <%= image_tag product.medium_image, class: " object-cover mb-2" %>
             <% else %>
               <div class="image-placeholder"></div>
             <% end %>
           </div>
-          <h2 class="text-xl font-semibold mt-4"><%= link_to product.name, product_path(product) %></h2>
-          <p class="mb-2"><%= product.description %></p>
-          <p class="text-lg font-bold mb-2">Price: $<%= product.price %></p>
-          <p class="mb-2">Stock: <%= product.stock_quantity %> items</p>
-          <%= form_with url: add_to_cart_product_path(product), method: :post, local: true do |f| %>
-            <%= number_field_tag :quantity, 1, min: 1, class: "w-16 p-2 border rounded mb-2" %>
-            <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded" %>
-          <% end %>
+          <div class="ml-4">
+            <h2 class="text-xl font-semibold mt-4"><%= link_to product.name, product_path(product) %></h2>
+            <p class="mb-2"><%= product.description %></p>
+            <p class="text-xl font-bold mb-2 <%= product.on_sale? ? 'text-red-500' : 'text-black' %>">
+              $<%= number_with_precision(product.discounted_price || product.price, precision: 2) %>
+              <% if product.on_sale.present? %>
+                <span class="line-through text-gray-500 text-xl">$<%= number_with_precision(product.price, precision: 2) %></span>
+              <% end %>
+            </p>
+            <p class="text-sm text-gray-500 mt-2 mb-4">
+              Stock: <span class="<%= product.stock_level[:color] %>"><%= product.stock_level[:level] %></span>
+            </p>
+            <%= form_with url: add_to_cart_product_path(product), method: :post, local: true do |f| %>
+              <%= number_field_tag :quantity, 1, min: 1, class: "w-16 h-10 p-2 border rounded mb-2" %>
+              <%= f.submit 'Add to Cart', class: "bg-blue-500 text-white px-3 py-2 rounded" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

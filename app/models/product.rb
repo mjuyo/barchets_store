@@ -28,8 +28,19 @@ class Product < ApplicationRecord
         image.variant(resize_to_limit: [80, 80])
     end
 
+    # Stock level
+    def stock_level
+        if stock_quantity > 50
+            { level: 'High', color: 'green' }
+          elsif stock_quantity > 10
+            { level: 'Medium', color: 'orange' }
+          else
+            { level: 'Low', color: 'red' }
+          end
+      end
+
     def self.ransackable_attributes(auth_object = nil)
-        ["created_at", "description", "id", "id_value", "name", "price", "stock_quantity", "updated_at", "on_sale"]
+        ["created_at", "description", "id", "id_value", "name", "price", "discounted_price", "stock_quantity", "updated_at", "on_sale"]
     end
 
     def self.ransackable_associations(auth_object = nil)

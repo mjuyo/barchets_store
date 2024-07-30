@@ -22,12 +22,12 @@ class ProductsController < ApplicationController
       @products = @products.recently_updated
     end
 
-    @products = @products.page(params[:page]).per(9)
+    @products = @products.page(params[:page]).per(12)
   end
 
   def category
     @category = Category.find(params[:id])
-    @products = @category.products.page(params[:page]).per(9)
+    @products = @category.products.page(params[:page]).per(12)
     render :index
   end
 

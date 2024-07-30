@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
   # Specify parameters which should be permitted for assignment
-  permit_params :name, :description, :price, :stock_quantity, :on_sale, :image, category_ids: [] 
+  permit_params :name, :description, :price, :discounted_price, :stock_quantity, :on_sale, :image, category_ids: [] 
 
   # For security, limit the actions that should be available
   actions :all, except: []
@@ -10,6 +10,7 @@ ActiveAdmin.register Product do
   filter :name
   filter :description
   filter :price
+  filter :discounted_price
   filter :stock_quantity
   filter :on_sale
   filter :categories, as: :check_boxes, collection: proc { Category.all }
@@ -23,6 +24,7 @@ ActiveAdmin.register Product do
     column :name
     column :description
     column :price
+    column :discounted_price
     column :stock_quantity
     column :on_sale
     column :categories do |product|
@@ -40,6 +42,7 @@ ActiveAdmin.register Product do
       row :name
       row :description
       row :price
+      row :discounted_price
       row :stock_quantity
       row :on_sale
       row :categories do |product|
@@ -62,6 +65,7 @@ ActiveAdmin.register Product do
       f.input :name
       f.input :description
       f.input :price
+      f.input :discounted_price
       f.input :stock_quantity
       f.input :on_sale
       f.input :categories, as: :check_boxes
