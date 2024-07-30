@@ -95,6 +95,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
+    bootstrap-icons (1.0.14)
+      nokogiri (~> 1)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -357,6 +359,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (= 4.0.0.beta7)
   bootsnap
+  bootstrap-icons (~> 1.0)
   capybara
   cssbundling-rails (~> 1.4)
   debug

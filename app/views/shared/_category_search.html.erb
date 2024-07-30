@@ -1,28 +1,33 @@
 <div class="bg-gray-100 p-4">
   <div class="container mx-auto flex justify-between items-center">
-    <div class="flex items-center space-x-4">
+
+    <%= form_with url: products_path, method: :get, local: true, class: "flex space-x-4" do |form| %>
+      <div class="flex-grow">
+        <%= form.select :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), { include_blank: "All categories" }, class: "mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+      <div class="relative flex-grow">
+        <%= form.text_field :search, value: params[:search], placeholder: "Search by product or keyword", class: "mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        <button type="submit" class="absolute inset-y-0 right-0 px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
+    <% end %>
+
+    <div class="flex items-center space-x-4 mt-5">
       <nav class="mb-6">
-        <h2 class="text-xl font-semibold">Categories</h2>
+        <%# <h2 class="text-xl font-semibold">Categories</h2> %>
         <ul class="flex space-x-4">
           <% Category.all.each do |category| %>
-            <li>
-              <%= link_to category.name, category_path(category), class: "text-blue-500 hover:underline" %>
+            <li class="flex flex-col items-center">
+              <%= link_to category_path(category) do %>
+                <%= image_tag "categories/#{category.name.downcase.tr(' ', '_')}.png", class: "h-16 w-16 object-cover mb-1" %>
+                <span class="text-blue-500 hover:underline text-center"><%= category.name %></span>
+              <% end %>
             </li>
           <% end %>
         </ul>
       </nav>
-      
-      <%= form_with url: products_path, method: :get, local: true, class: "flex space-x-4 w-full" do |form| %>
-        <div class="flex-grow">
-          <%= form.select :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), { include_blank: "All categories" }, class: "mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
-        </div>
-        <div class="relative flex-grow">
-          <%= form.text_field :search, value: params[:search], placeholder: "Search by product or keyword", class: "mt-1 block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
-          <button type="submit" class="absolute inset-y-0 right-0 px-4 py-2 bg-blue-500 text-white rounded-r-md hover:bg-blue-600">
-            <span class="material-icons">search</span>
-          </button>
-        </div>
-      <% end %>
     </div>
+
   </div>
 </div>

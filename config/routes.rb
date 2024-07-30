@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   devise_for :customers
   root to: 'home#index'
 
+  resources :customers, only: [:show, :edit, :update]
+
   resources :products, only: [:index, :show] do
     collection do
       get :on_sale

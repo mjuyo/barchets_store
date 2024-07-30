@@ -81,3 +81,5 @@ gem "sass-rails", "~> 6.0"
 gem "stripe", "~> 12.3"
 
 gem 'dotenv-rails', groups: [:development, :test]
+
+gem "bootstrap-icons", "~> 1.0"

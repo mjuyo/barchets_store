@@ -1,0 +1,19 @@
+<div class="container mx-auto p-4 mt-6">
+  <h1 class="text-4xl font-bold mb-4"><%= @customer.name %></h1>
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <div class="mb-4">
+      <h2 class="text-xl font-semibold">Personal Information</h2>
+      <p><strong>Name:</strong> <%= @customer.name %></p>
+      <p><strong>Email:</strong> <%= @customer.email %></p>
+      <p><strong>Phone:</strong> <%= @customer.phone_number %></p>
+      <p><strong>Address:</strong> <%= @customer.address %></p>
+      <p><strong>Province:</strong> <%= @province.name %></p>
+    </div>
+
+    <div class="flex space-x-4 mt-4">
+      <%= link_to 'Edit Information', edit_customer_registration_path, class: "bg-blue-500 text-white px-3 py-2 rounded-lg" %>
+      <%= link_to 'Orders', orders_path, class: "bg-green-500 text-white px-3 py-2 rounded-lg" %>
+      <%= button_to 'Logout', destroy_customer_session_path, method: :delete, class: "bg-red-500 text-white px-3 py-2 rounded-lg", data: { confirm: "Are you sure?" } %>
+    </div>
+  </div>
+</div>
