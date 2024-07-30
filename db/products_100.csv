@@ -1,0 +1,101 @@
+name,description,price,stock_quantity,on_sale,discounted_price,categories
+Red Apples,"3kg of fresh and juicy red apples, perfect for snacking and baking.",3,100,FALSE,,"Fruits,Snacks"
+Bananas,"Ripe and sweet bananas, ideal for a healthy snack.",2.5,120,FALSE,,Fruits
+Whole Milk,"Creamy and fresh whole milk, perfect for drinking and cooking.",1.5,80,FALSE,,Dairy
+Whole Wheat Bread,"Nutritious whole wheat bread, great for sandwiches and toast.",2,60,TRUE,1.8,Bakery
+Orange Juice,"Refreshing orange juice, made from freshly squeezed oranges.",3.5,70,TRUE,3,Beverages
+Strawberry Yogurt,"Delicious strawberry flavored yogurt, a healthy treat.",2,50,FALSE,,"Dairy,Snacks"
+Cheddar Cheese,"Rich and sharp cheddar cheese block, perfect for cheese boards.",5,40,FALSE,,Dairy
+Tomatoes,"3kg of fresh and ripe tomatoes, perfect for salads and cooking.",1.2,200,FALSE,,Vegetables
+Carrots,"2kg of crunchy and sweet organic carrots, great for snacking and cooking.",3,150,FALSE,,Vegetables
+Granola Bar,"Healthy and tasty granola bar, perfect for on-the-go snacking.",1.5,90,FALSE,,"Snacks,Bakery"
+Bottled Spring Water,"Pure bottled spring water, refreshing and hydrating.",1,300,FALSE,,Beverages
+Organic Eggs,"High-quality organic eggs, perfect for breakfast and baking.",8,110,TRUE,7.5,Dairy
+Salted Butter,"Creamy salted butter, great for cooking and baking.",3,60,FALSE,,"Dairy,Bakery"
+Chicken Breast,"Lean and tender skinless chicken breast, perfect for grilling.",6.5,70,TRUE,6,Meat
+Beef Steak,"Tender and juicy beef steak, great for grilling and roasting.",10,50,FALSE,,Meat
+Green Grapes,"Fresh and sweet green grapes, perfect for snacking.",4,120,FALSE,,"Fruits,Snacks"
+Spinach,"Fresh and nutritious organic spinach, great for salads and cooking.",2,90,TRUE,1.8,Vegetables
+White Rice,"High-quality white rice, perfect for a variety of dishes.",2,150,FALSE,,Grains
+Almond Milk,"Smooth and creamy almond milk, a great dairy alternative.",3,80,TRUE,2.5,Dairy
+Sweet Potatoes,"Delicious and nutritious sweet potatoes, perfect for baking.",2.5,100,FALSE,,Vegetables
+Whole Grain Pasta,"Healthy whole grain pasta, great for a nutritious meal.",1.8,200,FALSE,,Grains
+Dark Chocolate,"Rich and indulgent dark chocolate, perfect for a treat.",5,50,TRUE,4.5,Snacks
+Strawberries,"Fresh and sweet strawberries, great for snacking and desserts.",4,60,FALSE,,Fruits
+Coconut Water,"Refreshing coconut water, perfect for hydrating.",2,70,FALSE,,Beverages
+Feta Cheese,"Tangy and creamy feta cheese, great for salads.",6,40,TRUE,5.5,Dairy
+Olive Oil,500ml bottle of pure extra virgin olive oil,10,100,TRUE,8,Oils and Sauces
+White Sugar,1kg pack of white granulated sugar,5,200,FALSE,,Baking
+Whole Wheat Flour,2kg pack of whole wheat flour,6,150,TRUE,5,Baking
+Tomato Sauce,500g jar of tomato sauce,3.5,120,FALSE,,Oils and Sauces
+Baking Powder,250g can of baking powder,2.5,80,TRUE,2,Baking
+Chocolate Chips,200g bag of chocolate chips,4,70,FALSE,,Baking
+Lemon Juice,250ml bottle of lemon juice,2,90,TRUE,1.5,Oils and Sauces
+Soy Sauce,500ml bottle of soy sauce,3,100,FALSE,,Oils and Sauces
+Vinegar,1L bottle of white vinegar,1.5,110,TRUE,1,Oils and Sauces
+Canned Tuna,170g can of tuna in water,2,130,FALSE,,Canned
+Frozen Peas,500g bag of frozen peas,2.5,140,TRUE,2,Frozen
+Beef Mince,1kg pack of minced beef,8,100,FALSE,,Meat
+Chicken Thighs,1kg pack of chicken thighs,6,120,TRUE,5,Meat
+Pork Chops,1kg pack of pork chops,7,110,FALSE,,Meat
+Salmon Fillets,500g pack of salmon fillets,10,100,TRUE,8,Meat
+Shrimp,500g pack of frozen shrimp,12,90,FALSE,,Meat
+Frozen Berries,500g bag of mixed frozen berries,7,80,TRUE,6,Snacks
+Ice Cream,1L tub of vanilla ice cream,5,100,FALSE,,Snacks
+Greek Yogurt,500g tub of Greek yogurt,4,110,TRUE,3,Dairy
+Almond Milk,1L carton of almond milk,3.5,120,FALSE,,Dairy
+Coconut Milk,1L carton of coconut milk,3.5,100,TRUE,2.5,Dairy
+Cheddar Cheese,500g block of cheddar cheese,5,90,FALSE,,Dairy
+Mozzarella Cheese,500g block of mozzarella cheese,4.5,110,TRUE,3,Dairy
+Parmesan Cheese,500g block of Parmesan cheese,6,100,FALSE,,Dairy
+Sour Cream,500ml tub of sour cream,3,80,TRUE,2,Dairy
+Spinach,Fresh organic spinach.,2.5,150,TRUE,2,Vegetables
+Cheddar Cheese,Aged cheddar cheese.,3,40,FALSE,,Dairy
+Chicken Breast,Lean chicken breast fillets.,6.5,70,TRUE,6,Meat
+Ground Beef,Ground beef for burgers.,5,50,FALSE,,Meat
+Olive Oil,Extra virgin olive oil.,8,60,TRUE,7.5,Oils and Sauces
+Broccoli,Fresh organic broccoli.,2,90,TRUE,1.5,Vegetables
+Cereal,Whole grain breakfast cereal.,3.5,80,FALSE,,Grains
+Blueberries,Fresh organic blueberries.,4,100,TRUE,3.5,Fruits
+Sugar,Granulated white sugar.,1.5,120,FALSE,,Baking
+Baby carrots,Organic baby carrots.,2,150,TRUE,1.5,Vegetables
+Cream Cheese,Soft cream cheese spread.,2.5,50,FALSE,,Dairy
+Beef Steak,Tender beef steak.,10,40,TRUE,9,Meat
+Orange Juice,Freshly squeezed orange juice.,3,70,FALSE,,Beverages
+Tomatoes,Organic ripe tomatoes.,1.8,200,TRUE,1.5,Vegetables
+Greek Yogurt,Plain Greek yogurt.,2.5,50,FALSE,,Dairy
+Rice,Long grain white rice.,1,150,TRUE,0.8,Grains
+Apple Juice,Fresh apple juice.,2.5,90,FALSE,,Beverages
+Mushrooms,Organic button mushrooms.,2,80,TRUE,1.5,Vegetables
+Pasta,Whole grain pasta.,1.5,70,FALSE,,Grains
+Peanut Butter,Creamy peanut butter.,3,60,TRUE,2.5,Baking
+Ice Cream,Vanilla ice cream.,4.5,100,FALSE,,Snacks
+Frozen Pizza,Frozen margherita pizza.,7,80,TRUE,6.5,Snacks
+Salmon Fillet,Fresh salmon fillet.,12,60,FALSE,,Meat
+Granola,Crunchy granola.,3.5,90,TRUE,3,Grains
+Almond Milk,Unsweetened almond milk.,3,100,FALSE,,Beverages
+Sunflower Oil,1 liter bottle of sunflower oil,3.99,100,TRUE,3.49,Oils and Sauces
+Canned Tuna,"Canned tuna in water, 200g",2.49,150,FALSE,,Canned
+Rice,1 kg bag of rice,1.99,200,TRUE,1.79,Grains
+Chicken Wings,1 kg of chicken wings,5.99,80,FALSE,,Meat
+Broccoli,"Fresh broccoli, 500g",1.49,90,TRUE,1.29,Vegetables
+Orange Juice,1 liter of orange juice,2.99,120,FALSE,,Beverages
+Croissant,Pack of 4 croissants,4.99,70,TRUE,4.49,Bakery
+Cheese,"Cheddar cheese, 200g",3.49,50,FALSE,,Dairy
+Potato Chips,Family pack of potato chips,2.99,160,TRUE,2.69,Snacks
+Bananas,Bunch of bananas,1.99,180,FALSE,,Fruits
+Olive Oil,500 ml bottle of olive oil,6.49,110,TRUE,5.99,Oils and Sauces
+Canned Beans,"Canned black beans, 400g",1.29,140,FALSE,,Canned
+Quinoa,1 kg of quinoa,4.99,130,TRUE,4.49,Grains
+Pork Chops,1 kg of pork chops,8.99,100,FALSE,,Meat
+Bell Peppers,Pack of 3 bell peppers,2.99,85,TRUE,2.69,Vegetables
+Lemonade,1 liter of lemonade,2.49,115,FALSE,,Beverages
+Muffin,Pack of 6 muffins,3.49,95,TRUE,2.99,Bakery
+Milk,1 liter of whole milk,1.79,200,FALSE,,Dairy
+Pretzels,Pack of pretzels,2.49,130,TRUE,2.79,Snacks
+Apples,Pack of 6 apples,2.99,175,FALSE,,Fruits
+Soy Sauce,500 ml bottle of soy sauce,2.99,105,TRUE,2.69,Oils and Sauces
+Canned Corn,"Canned corn, 300g",1.49,125,FALSE,,Canned
+Oats,500g pack of oats,2.99,135,TRUE,2.69,Grains
+Beef Jerky,200g pack of beef jerky,7.99,60,FALSE,,Meat
+Carrots,1 kg of fresh carrots,1.89,150,TRUE,1.69,Vegetables

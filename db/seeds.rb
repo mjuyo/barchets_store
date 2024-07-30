@@ -29,17 +29,37 @@
 # end
 
 
+# require 'csv'
+
+# csv_file_path = Rails.root.join('db', 'provinces.csv')
+
+# CSV.foreach(csv_file_path, headers: true) do |row|
+#   Province.find_or_create_by!(
+#     name: row['Name'],
+#     pst_rate: row['pst_rate'].to_f,
+#     hst_rate: row['hst_rate'].to_f,
+#     gst_rate: row['gst_rate'].to_f,
+#     qst_rate: row['qst_rate'].to_f
+#   )
+# end
+
 require 'csv'
 
-csv_file_path = Rails.root.join('db', 'provinces.csv')
+filepath = Rails.root.join('db','products_100.csv')
 
-CSV.foreach(csv_file_path, headers: true) do |row|
-  Province.find_or_create_by!(
-    name: row['Name'],
-    pst_rate: row['pst_rate'].to_f,
-    hst_rate: row['hst_rate'].to_f,
-    gst_rate: row['gst_rate'].to_f,
-    qst_rate: row['qst_rate'].to_f
+CSV.foreach(filepath, headers: true) do |row|
+  categories = row['categories'].split(',').map do |category_name|
+    Category.find_or_create_by(name: category_name.strip)
+  end
+
+  Product.create(
+    name: row['name'],
+    description: row['description'],
+    price: row['price'].to_f,
+    stock_quantity: row['stock_quantity'].to_i,
+    on_sale: row['on_sale'] == 'true', 
+    discounted_price: row['discounted_price'].to_f,
+    categories: categories
   )
 end
 
