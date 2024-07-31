@@ -6,10 +6,9 @@ class Product < ApplicationRecord
     has_many :prices
     has_one_attached :image
 
-    validates :name, presence: true
-    validates :description, presence: true
-    validates :price, presence: true
-    validates :stock_quantity, presence: true
+    validates :name, :description, :price, :stock_quantity, presence: true
+    validates :price, :discounted_price, numericality: true
+    validates :stock_quantity, numericality: { only_integer: true }
 
     scope :on_sale, -> { where(on_sale: true) }
     scope :new_products, ->  { where('created_at >= ?', 3.days.ago) }

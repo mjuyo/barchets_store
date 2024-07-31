@@ -14,17 +14,18 @@
         <div>
         <% if customer_signed_in? %>
             <span class="text-white"><%= current_customer.name %></span>
+                    <div>
+            <%= link_to customer_path(current_customer), class: "text-2xl font-bolder text-white px-3 py-2 ml-1 flex items-center" do %>
+            <i class="bi bi-person-circle"></i>
+            <% end %>
+        </div>
             <%# <%= button_to 'Logout', destroy_customer_session_path, :method => :delete, class: "text-white mx-2", data: { confirm: "Are you sure?" } %>
         <% else %>
             <%= link_to 'Sign Up', new_customer_registration_path, class: "bg-blue-500 text-white px-3 py-2 rounded" %>
             <%= link_to 'Login', new_customer_session_path, class: "bg-green-500 text-white px-3 py-2 rounded ml-2" %>
         <% end %>
         </div>
-        <div>
-            <%= link_to customer_path(current_customer), class: "text-2xl font-bolder text-white px-3 py-2 ml-1 flex items-center" do %>
-            <i class="bi bi-person-circle"></i>
-            <% end %>
-        </div>
+
         <div>
         <%= link_to cart_path, class: "text-2xl font-bolder text-white px-3 py-2 ml-1 flex items-center" do %>
             <i class="bi bi-cart3"></i>
